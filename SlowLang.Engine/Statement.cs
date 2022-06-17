@@ -11,7 +11,7 @@ namespace SlowLang.Engine.Statements;
 /// </summary>
 public abstract class Statement
 {
-    protected static readonly ILogger Logger = Interpreter.LoggerFactory.CreateLogger("SlowLang.Statements");
+    protected static readonly ILogger Logger = LoggingManager.LoggerFactory.CreateLogger("SlowLang.Statements");
 
 
     private static bool isInitialized;
@@ -79,7 +79,7 @@ public abstract class Statement
             return statement;
 
 
-        Interpreter.LogError($"Unexpected string '{list.Peek().RawContent}'", list.Peek().LineNumber);
+        LoggingManager.LogError($"Unexpected string '{list.Peek().RawContent}'", list.Peek().LineNumber);
         return null!;
     }
 
@@ -115,12 +115,14 @@ public abstract class Statement
         //Set the line number
         statement.LineNumber = tokenList.List[0].LineNumber;
 
-        //Remove the tokens that match from the token list
-        if (!statement.CutTokensManually())
-            tokenList.List.RemoveRange(0, registration.Match.Length);
+
 
         //Invoke its OnParse() callback
         statement.OnParse(ref tokenList);
+        
+        //Remove the tokens that match from the token list
+        if (!statement.CutTokensManually())
+            tokenList.List.RemoveRange(0, registration.Match.Length);
 
         //ParseStatementExtension(statement, ref tokenList);
 
@@ -159,12 +161,12 @@ public abstract class Statement
             //Set the line number
             statement.LineNumber = list.List[0].LineNumber;
 
+            //Invoke its OnParse() callback
+            statement.OnParse(ref list);
+            
             //Remove the tokens that match from the token list
             if (!statement.CutTokensManually())
                 list.List.RemoveRange(0, registration.Match.Length);
-
-            //Invoke its OnParse() callback
-            statement.OnParse(ref list);
 
             return ParseStatementExtension(statement, ref list);
             
