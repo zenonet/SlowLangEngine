@@ -9,7 +9,7 @@ namespace SlowLang.Engine.Values;
 /// </summary>
 public abstract class Value
 {
-    private static readonly ILogger Logger = Interpreter.LoggerFactory.CreateLogger("SlowLang.ValueSystem");
+    private static readonly ILogger Logger = LoggingManager.LoggerFactory.CreateLogger("SlowLang.ValueSystem");
 
     
     
@@ -63,7 +63,9 @@ public abstract class Value
         //And return null
         return null;
     }
-
-    //TODO: find a better name since Value.HasValue doesn't really make sense
-    public bool HasValue => this != SlowVoid.I;
+    
+    /// <summary>
+    /// Indicates whether this value object has a value
+    /// </summary>
+    public bool IsVoid => this == SlowVoid.I;
 }
