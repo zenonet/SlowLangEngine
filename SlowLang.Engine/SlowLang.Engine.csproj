@@ -7,6 +7,7 @@
         <Title>SlowLangEngine</Title>
         <Authors>zenonet</Authors>
         <Description>An engine for creating simple programming languages in C#. Base of  SlowLang</Description>
+        <RepositoryUrl>https://github.com/zenonet/SlowLangEngine</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
