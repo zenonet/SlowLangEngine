@@ -24,7 +24,7 @@ public class TokenList : IEnumerable<Token>
         if (List.Count > offset)
             return List[offset];
 
-        Interpreter.LogError("Invalid syntax at end of file");
+        LoggingManager.LogError("Invalid syntax at end of file");
         return null!;
     }
 
@@ -43,7 +43,7 @@ public class TokenList : IEnumerable<Token>
         return false;
     }
 
-#region TrimMethods
+    #region TrimMethods
 
     /// <summary>
     /// Trims all occurrences of TokenTypes from the start of the TokenList
