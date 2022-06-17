@@ -6,7 +6,7 @@ namespace SlowLang.Engine;
 
 public static class Lexer
 {
-    private static readonly ILogger Logger = Interpreter.LoggerFactory.CreateLogger("SlowLang.Lexer");
+    private static readonly ILogger Logger = LoggingManager.LoggerFactory.CreateLogger("SlowLang.Lexer");
 
     private static readonly string NewLine = Environment.NewLine;
 
