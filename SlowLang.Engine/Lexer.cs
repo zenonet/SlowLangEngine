@@ -4,6 +4,9 @@ using SlowLang.Engine.Tokens;
 
 namespace SlowLang.Engine;
 
+/// <summary>
+/// A system to convert a string into TokenList which are easier to parse and more efficient 
+/// </summary>
 public static class Lexer
 {
     private static readonly ILogger Logger = LoggingManager.LoggerFactory.CreateLogger("SlowLang.Lexer");
