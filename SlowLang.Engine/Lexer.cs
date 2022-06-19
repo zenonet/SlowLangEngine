@@ -13,29 +13,18 @@ public static class Lexer
 
     private static readonly string NewLine = Environment.NewLine;
 
-    private static readonly Dictionary<string, TokenType> TokenDefinitions = new()
+    private static Dictionary<string, TokenType> tokenDefinitions = new();
+
+    public static void DefineToken(string regexPattern, TokenType tokenType)
     {
-        {"\".*?\"", TokenType.String},
-        
-        {@"\(", TokenType.OpeningBrace},
-        {@"\)", TokenType.ClosingBrace},
-        
-        {@"\{", TokenType.OpeningCurlyBrace},
-        {@"\}", TokenType.ClosingCurlyBrace},
-        
-        {@"\d+", TokenType.Int},
-        {@"\d+.?\d*(?:f|F)", TokenType.Float},
-        {@"(?:(?:t|T)(?:rue|RUE))|(?:(?:f|F)(?:alse|ALSE))", TokenType.Bool},
-        
-        
-        {@";", TokenType.Semicolon},
-        {@",", TokenType.Comma},
-        {@"\s*=\s*", TokenType.Equals},
-        
-        
-        {@"\w*", TokenType.Keyword}, //Needs to be the last one
-    };
-    
+        tokenDefinitions.Add(regexPattern, tokenType);
+    }
+
+    public static void DefineTokens(Dictionary<string, TokenType> definitions)
+    {
+        tokenDefinitions = definitions;
+    }
+
     public static TokenList Lex(string code)
     {
         TokenList tokenList = new TokenList();
@@ -49,7 +38,7 @@ public static class Lexer
             }
 
             //Iterate through all defined tokens
-            foreach (KeyValuePair<string,TokenType> tokenDefinition in TokenDefinitions)
+            foreach (KeyValuePair<string,TokenType> tokenDefinition in tokenDefinitions)
             {
                 //Try to match them at the start of code
                 Match match = Regex.Match(code, "^" + tokenDefinition.Key);
