@@ -15,6 +15,11 @@ public static class Lexer
 
     private static Dictionary<string, TokenType> tokenDefinitions = new();
 
+    /// <summary>
+    /// Adds a token to the TokenDefinitions
+    /// </summary>
+    /// <param name="regexPattern">The pattern to search for    </param>
+    /// <param name="tokenType">The token to reference it with</param>
     public static void DefineToken(string regexPattern, TokenType tokenType)
     {
         tokenDefinitions.Add(regexPattern, tokenType);
