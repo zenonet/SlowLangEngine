@@ -18,13 +18,17 @@ public static class Lexer
     /// <summary>
     /// Adds a token to the TokenDefinitions
     /// </summary>
-    /// <param name="regexPattern">The pattern to search for    </param>
+    /// <param name="regexPattern">The pattern to search for</param>
     /// <param name="tokenType">The token to reference it with</param>
     public static void DefineToken(string regexPattern, TokenType tokenType)
     {
         tokenDefinitions.Add(regexPattern, tokenType);
     }
 
+    /// <summary>
+    /// Sets all TokenDefinitions to a dictionary
+    /// </summary>
+    /// <param name="definitions">A Dictionary where the keys are regex patterns and the values are the TokenTypes</param>
     public static void DefineTokens(Dictionary<string, TokenType> definitions)
     {
         tokenDefinitions = definitions;
