@@ -17,7 +17,7 @@ public static class ParsingUtility
     /// <param name="closingBracket">The TokenType which ends a brace pair</param>
     /// <param name="logger">A logger to use when logging errors</param>
     /// <returns>Everything between the braces</returns>
-    public static TokenList? FindBetweenBraces(TokenList input, TokenType openingBracket, TokenType closingBracket, ILogger logger)
+    public static TokenList? FindBetweenBraces(this TokenList input, TokenType openingBracket, TokenType closingBracket, ILogger logger)
     {
         int openedBraces = 1;
         TokenList? codeBlock = null;
