@@ -124,6 +124,24 @@ public abstract class Value
         return null!;
     }
 
+    public static Type? ParseTypeKeyword(Token token)
+    {
+        if (token.Type is TokenType.Keyword)
+            return null;
+        
+        //Uhm...how should I explain this?
+        //Basically I created a foreach loop with all the logic and my IDE said: "Hey, I can make this into a LINQ statement for you"
+        return (from valueType in ParsingUtility.GetAllInheritors(typeof(Value))
+            let methodInfo = valueType.GetMethod("GetKeyword")
+            where methodInfo is not null &&
+                  methodInfo.ReturnType == typeof(string) &&
+                  methodInfo.GetParameters() == Array.Empty<ParameterInfo>()
+            let keyword = (string) methodInfo.Invoke(null,
+                null)!
+            where keyword == token.RawContent
+            select valueType).FirstOrDefault();
+    }
+
     /// <summary>
     /// Indicates whether this value object has a value
     /// </summary>
