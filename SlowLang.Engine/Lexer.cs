@@ -45,25 +45,25 @@ public static class Lexer
             {
                 code = code[NewLine.Length..];
                 lineNumber++;
-                
+
                 code = code.TrimStart(' ');
             }
-            
+
 
             //Iterate through all defined tokens
-            foreach (KeyValuePair<string,TokenType> tokenDefinition in tokenDefinitions)
+            foreach (KeyValuePair<string, TokenType> tokenDefinition in tokenDefinitions)
             {
                 //Try to match them at the start of code
                 Match match = Regex.Match(code, "^" + tokenDefinition.Key);
-                
-                if(!match.Success)
+
+                if (!match.Success)
                     continue;
-                
+
                 //If the current tokenDefinition got matched successfully, add it to the TokenList
                 tokenList.Add(new Token(match.Value, tokenDefinition.Value, lineNumber));
-                
+
                 //Remove the matched region from code
-                code = code.Substring(match.Value.Length);
+                code = code[match.Value.Length..];
 
                 //And break out of the foreach loop
                 break;
