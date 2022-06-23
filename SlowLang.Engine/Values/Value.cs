@@ -96,11 +96,11 @@ public abstract class Value
     /// Throws an error if the conversion doesn't work
     /// </summary>
     /// <returns>The value that got converted (hopefully)</returns>
-    public Value ConvertImplicitly<TTarget>() where TTarget : Value
+    public TTarget ConvertImplicitly<TTarget>() where TTarget : Value
     {
         if (TryConvertImplicitly(typeof(TTarget), out Value convertedValue))
         {
-            return convertedValue;
+            return (TTarget) convertedValue;
         }
 
         LoggingManager.LogError($"Unable to implicitly covert {this} to {typeof(TTarget).Name}");
