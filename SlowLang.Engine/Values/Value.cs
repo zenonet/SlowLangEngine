@@ -66,15 +66,14 @@ public abstract class Value
     /// <summary>
     /// Tries to convert a value into another Value implicitly
     /// </summary>
-    /// <param name="input">The input value</param>
     /// <param name="targetType">The type to convert the input into</param>
     /// <param name="output">The Value that got converted (hopefully)</param>
     /// <returns>A bool that determines whether the conversion was successful</returns>
-    public virtual bool TryConvertImplicitly(Value input, Type targetType, [MaybeNullWhen(false)] out Value output)
+    public virtual bool TryConvertImplicitly(Type targetType, [MaybeNullWhen(false)] out Value output)
     {
-        if (input.GetType() == targetType)
+        if (this.GetType() == targetType)
         {
-            output = input;
+            output = this;
             return true;
         }
 
@@ -86,16 +85,15 @@ public abstract class Value
     /// Converts a value into another Value implicitly.
     /// Throws an error if the conversion doesn't work
     /// </summary>
-    /// <param name="input">The input value</param>
     /// <param name="targetType">The type to convert the input into</param>
     /// <returns>The value that got converted (hopefully)</returns>
-    public virtual Value ConvertImplicitly(Value input, Type targetType)
+    public virtual Value ConvertImplicitly(Type targetType)
     {
-        if (input.GetType() == targetType)
+        if (this.GetType() == targetType)
         {
-            return input;
+            return this;
         }
-        LoggingManager.LogError($"Unable to implicitly covert {input} to {targetType.Name}");
+        LoggingManager.LogError($"Unable to implicitly covert {this} to {targetType.Name}");
         return null!;
     }
 
