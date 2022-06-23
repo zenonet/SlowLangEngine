@@ -40,11 +40,15 @@ public static class Lexer
         int lineNumber = 1;
         while (code.Length > 0)
         {
+            code = code.TrimStart(' ');
             while (code.StartsWith(NewLine))
             {
                 code = code[NewLine.Length..];
                 lineNumber++;
+                
+                code = code.TrimStart(' ');
             }
+            
 
             //Iterate through all defined tokens
             foreach (KeyValuePair<string,TokenType> tokenDefinition in tokenDefinitions)
