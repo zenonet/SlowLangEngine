@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using Microsoft.Extensions.Logging;
 using SlowLang.Engine.Tokens;
 
@@ -11,8 +12,6 @@ public abstract class Value
 {
     private static readonly ILogger Logger = LoggingManager.LoggerFactory.CreateLogger("SlowLang.ValueSystem");
 
-    
-    
 
     /// <summary>
     /// Contains all variables in the current script
@@ -33,23 +32,23 @@ public abstract class Value
             MethodInfo? method = inheritor.GetMethod("TryParse");
 
             //If the method doesn't exist, just skip it
-            if(method is null)
+            if (method is null)
                 continue;
-            
+
             //Create the parameters array
-            object?[] parameters = {tokenList, null };
-            
+            object?[] parameters = {tokenList, null};
+
             //Invoke the method
-            bool worked = (bool) method.Invoke(null, parameters )!;
-            
+            bool worked = (bool) method.Invoke(null, parameters)!;
+
             //If the Parser wasn't able to Parse the value, continue with the next inheritor
-            if (!worked) 
+            if (!worked)
                 continue;
-            
+
             //If the parsing was successful return the Value that got parsed
-            if (parameters[1] is Value) 
-                return (Value)parameters[1]!;
-                
+            if (parameters[1] is Value)
+                return (Value) parameters[1]!;
+
             //If not, throw a warning
             Logger.LogWarning(
                 "{name} implements an invalid definition of TryParse()",
@@ -58,12 +57,18 @@ public abstract class Value
 
         //If none of the value parsers was successful, log an error
         Logger.LogError("Unable to Parse {tokenList}", tokenList);
-        
-        
+
+
         //And return null
         return null;
     }
-    
+
+    public virtual bool TryConvertingImplicitly(Value input, Type targetType, [MaybeNullWhen(false)] out Value output)
+    {
+        output = null;
+        return false;
+    }
+
     /// <summary>
     /// Indicates whether this value object has a value
     /// </summary>
