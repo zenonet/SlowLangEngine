@@ -66,6 +66,16 @@ public abstract class Value
     /// <summary>
     /// Tries to convert a value into another Value implicitly
     /// </summary>
+    /// <param name="output">The Value that got converted (hopefully)</param>
+    /// <returns>A bool that determines whether the conversion was successful</returns>
+    public bool TryConvertImplicitly<TTarget>([MaybeNullWhen(false)] out Value output) where TTarget : Value
+    {
+        return TryConvertImplicitly(typeof(TTarget), out output);
+    }
+
+    /// <summary>
+    /// Tries to convert a value into another Value implicitly
+    /// </summary>
     /// <param name="targetType">The type to convert the input into</param>
     /// <param name="output">The Value that got converted (hopefully)</param>
     /// <returns>A bool that determines whether the conversion was successful</returns>
@@ -80,7 +90,23 @@ public abstract class Value
         output = null;
         return false;
     }
-    
+
+    /// <summary>
+    /// Converts a value into another Value implicitly.
+    /// Throws an error if the conversion doesn't work
+    /// </summary>
+    /// <returns>The value that got converted (hopefully)</returns>
+    public Value ConvertImplicitly<TTarget>() where TTarget : Value
+    {
+        if (TryConvertImplicitly(typeof(TTarget), out Value convertedValue))
+        {
+            return convertedValue;
+        }
+
+        LoggingManager.LogError($"Unable to implicitly covert {this} to {typeof(TTarget).Name}");
+        return null!;
+    }
+
     /// <summary>
     /// Converts a value into another Value implicitly.
     /// Throws an error if the conversion doesn't work
@@ -93,6 +119,7 @@ public abstract class Value
         {
             return convertedValue;
         }
+
         LoggingManager.LogError($"Unable to implicitly covert {this} to {targetType.Name}");
         return null!;
     }
