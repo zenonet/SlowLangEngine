@@ -53,7 +53,7 @@ public static class ParsingUtility
     /// </summary>
     /// <param name="tokens">The collection of tokens</param>
     /// <returns>The TokenList</returns>
-    public static TokenList AsTokenList(this IEnumerable<Token> tokens) => new (tokens);
+    public static TokenList AsTokenList(this IEnumerable<Token> tokens) => new(tokens);
 
 
     /// <summary>
@@ -65,9 +65,9 @@ public static class ParsingUtility
     {
         //Thanks to 'Yahoo Serious' for his answer here: https://stackoverflow.com/questions/857705/get-all-derived-types-of-a-type
         return (from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
-            from assemblyType in domainAssembly.GetTypes()
-            where t.IsAssignableFrom(assemblyType) && t != assemblyType
-            select assemblyType
+                from assemblyType in domainAssembly.GetTypes()
+                where t.IsAssignableFrom(assemblyType) && t != assemblyType
+                select assemblyType
             ).ToArray();
     }
 
