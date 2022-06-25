@@ -126,7 +126,7 @@ public abstract class Value
 
     public static Type? ParseTypeKeyword(Token token)
     {
-        if (token.Type is TokenType.Keyword)
+        if (token.Type != TokenType.Keyword)
             return null;
         
         //Uhm...how should I explain this?
