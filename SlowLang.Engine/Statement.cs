@@ -72,9 +72,12 @@ public abstract class Statement
         Statement? statement = null;
         foreach (StatementRegistration registration in Registrations)
         {
-            statement ??= ParseStatementFromRegistration(registration, list);
+            statement = ParseStatementFromRegistration(registration, list);
+
+            if (statement != null)
+                break;
         }
-        
+
         if (statement != null)
             return statement;
 
