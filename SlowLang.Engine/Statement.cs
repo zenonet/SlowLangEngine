@@ -119,10 +119,9 @@ public abstract class Statement
         statement.LineNumber = tokenList.List[0].LineNumber;
 
 
-
         //Invoke its OnParse() callback
         statement.OnParse(ref tokenList);
-        
+
         //Remove the tokens that match from the token list
         if (!statement.CutTokensManually())
             tokenList.List.RemoveRange(0, registration.Match.Length);
@@ -131,7 +130,7 @@ public abstract class Statement
 
         return statement;
     }
-    
+
     private static Statement? ParseStatementExtension(Statement statement, ref TokenList list)
     {
         foreach (StatementExtensionRegistration registration in ExtensionRegistrations)
@@ -166,13 +165,13 @@ public abstract class Statement
 
             //Invoke its OnParse() callback
             statement.OnParse(ref list);
-            
+
             //Remove the tokens that match from the token list
             if (!statement.CutTokensManually())
                 list.List.RemoveRange(0, registration.Match.Length);
 
             return ParseStatementExtension(statement, ref list);
-            
+
 
             next: ;
         }
@@ -226,7 +225,13 @@ public abstract class Statement
                 initMethod.Invoke(null, null);
         }
 
-        //Sort registration
+        SortRegistrations();
+
+        isInitialized = true;
+    }
+
+    private static void SortRegistrations()
+    {
         Registrations.Sort((x, y) =>
             y.Match.Length - x.Match.Length + //Sorts by match length
             ( //And by whether x or y have a custom parser
@@ -234,8 +239,6 @@ public abstract class Statement
                 Convert.ToInt16(x.CustomParser != null)
             )
         );
-
-        isInitialized = true;
     }
 
 
