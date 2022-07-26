@@ -22,7 +22,7 @@ public abstract class Value
     /// <summary>
     /// Parses a TokenList into a Value object
     /// </summary>
-    /// <returns></returns>
+    /// <returns>The parsed value object</returns>
     public static Value? Parse(TokenList tokenList)
     {
         //Iterate through all inheritors of Value
