@@ -137,6 +137,9 @@ public abstract class Statement
         {
             if (!registration.BaseStatement.IsInstanceOfType(baseStatement))
                 continue;
+            
+            if (registration.Match.Length > list.List.Count)
+                continue;
 
             //Iterate through all elements and check if the TokenType matches
             for (int i = 0; i < registration.Match.Length; i++)
