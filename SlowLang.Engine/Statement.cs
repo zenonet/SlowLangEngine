@@ -126,9 +126,9 @@ public abstract class Statement
         if (!statement.CutTokensManually())
             tokenList.List.RemoveRange(0, registration.Match.Length);
 
-        //ParseStatementExtension(statement, ref tokenList);
+        Statement? extension = ParseStatementExtension(statement, ref tokenList);
 
-        return statement;
+        return extension ?? statement;
     }
 
     private static Statement? ParseStatementExtension(Statement statement, ref TokenList list)
