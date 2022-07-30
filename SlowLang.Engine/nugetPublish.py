@@ -1,7 +1,9 @@
 ﻿import os
 import sys
 
-csproj = open("SlowLang.Engine.csproj", "r+")
+project_name = "SlowLang.Engine"
+
+csproj = open(project_name + ".csproj", "r+")
 
 
 def get_increased_version(oldVersion: str) -> str:
@@ -28,26 +30,32 @@ def get_old_version(txt: str):
 def update_version() -> None:
     txt = csproj.read()
 
-    oldVersion = get_old_version(txt)
-    new = get_increased_version(oldVersion)
-    print(oldVersion)
+    old_version = get_old_version(txt)
+    new = get_increased_version(old_version)
+    print(old_version)
     print(new)
-    csproj.write(csproj.read().replace(oldVersion, new))
+    csproj.write(csproj.read().replace(old_version, new))
     csproj.flush()
 
 
 def pack():
     # pack the package
-    os.popen("dotnet pack --no-build --output \\bin\\nuget\\")
+    os.popen("dotnet pack --no-build --output " + os.getcwd() + "\\bin\\nuget\\")
 
 
 def push():
     # get api key
     apiKey = open("nugetApiKey.txt").read()
+
+    txt = csproj.read()
+
+    cmd = "dotnet nuget push " + os.getcwd() + "\\bin\\nuget\\" + project_name + "." + get_old_version(
+        txt) + ".nupkg --api-key " + apiKey + " --source https://api.nuget.org/v3/index.json"
+
+    print("Generated command to push\n" + cmd)
+
     os.popen(
-        "dotnet nuget push \\bin\\nuget\\SlowLang.Engine.1.0.0.nupkg --api-key " +
-        apiKey +
-        "--source https://api.nuget.org/v3/index.json"
+        cmd
     )
 
 
