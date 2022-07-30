@@ -131,7 +131,7 @@ public abstract class Statement
         return extension ?? statement;
     }
 
-    private static Statement? ParseStatementExtension(Statement statement, ref TokenList list)
+    private static Statement? ParseStatementExtension(Statement baseStatement, ref TokenList list)
     {
         foreach (StatementExtensionRegistration registration in ExtensionRegistrations)
         {
