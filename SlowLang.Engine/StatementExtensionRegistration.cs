@@ -31,7 +31,7 @@ public readonly struct StatementExtensionRegistration
         where TBase : Statement
         where TExtension : StatementExtension
     {
-        return new StatementExtensionRegistration(typeof(TExtension), typeof(TBase), customParser);
+        return new StatementExtensionRegistration(typeof(TExtension), typeof(TBase), customParser, match);
     }
 
     public static StatementExtensionRegistration CreateStatementExtensionRegistration<TBase, TExtension>(
@@ -39,7 +39,7 @@ public readonly struct StatementExtensionRegistration
         where TBase : Statement
         where TExtension : Statement
     {
-        return new StatementExtensionRegistration(typeof(TExtension), typeof(TBase), null);
+        return new StatementExtensionRegistration(typeof(TExtension), typeof(TBase), null, match);
     }
 
     #endregion
