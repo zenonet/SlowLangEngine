@@ -173,7 +173,7 @@ public abstract class Statement
             if (!statement.CutTokensManually())
                 list.List.RemoveRange(0, registration.Match.Length);
 
-            return ParseStatementExtension(statement, ref list);
+            return ParseStatementExtension(statement, ref list) ?? statement;
 
 
             next: ;
