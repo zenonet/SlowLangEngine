@@ -14,7 +14,31 @@ public static class Lexer
     private static readonly string NewLine = Environment.NewLine;
 
     private static Dictionary<string, TokenType> tokenDefinitions = new();
-
+    
+    private static readonly Dictionary<string, TokenType> DefaultTokenDefinitions = new()
+    {
+        {"\".*?\"", TokenType.String},
+        
+        {@"\(", TokenType.OpeningBrace},
+        {@"\)", TokenType.ClosingBrace},
+        
+        {@"\{|^block", TokenType.OpeningCurlyBrace},
+        {@"\}|^end", TokenType.ClosingCurlyBrace},
+        
+        {@"\d+", TokenType.Int},
+        {@"\d+.?\d*(?:f|F)", TokenType.Float},
+        {@"(?:(?:t|T)(?:rue|RUE))|(?:(?:f|F)(?:alse|ALSE))", TokenType.Bool},
+        
+        
+        {@";", TokenType.Semicolon},
+        {@",", TokenType.Comma},
+        {@"\s*=\s*", TokenType.Equals},
+        
+        
+        {@"\w*", TokenType.Keyword}, //Needs to be the last one because it would accept nearly anything
+    };
+    
+    
     /// <summary>
     /// Adds a token to the TokenDefinitions
     /// </summary>
@@ -36,6 +60,10 @@ public static class Lexer
 
     public static TokenList Lex(string code)
     {
+        //If no Tokens are defined, fall back to the default tokens
+        if (tokenDefinitions.Count < 1)
+            tokenDefinitions = DefaultTokenDefinitions;
+        
         TokenList tokenList = new TokenList();
         int lineNumber = 1;
         while (code.Length > 0)
