@@ -135,7 +135,7 @@ public abstract class Statement
     {
         foreach (StatementExtensionRegistration registration in ExtensionRegistrations)
         {
-            if (registration.BaseStatement != statement.GetType())
+            if (!registration.BaseStatement.IsInstanceOfType(baseStatement))
                 continue;
 
             //Iterate through all elements and check if the TokenType matches
