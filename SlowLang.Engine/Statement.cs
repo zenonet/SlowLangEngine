@@ -54,7 +54,7 @@ public abstract class Statement
             return;
         }
 
-        Logger.LogWarning("A StatementExtensionRegistration exists, which doesn't refer to a subclass of Statement");
+        Logger.LogWarning("A StatementExtensionRegistration exists, which doesn't refer to a subclass of StatementExtension");
     }
 
 
