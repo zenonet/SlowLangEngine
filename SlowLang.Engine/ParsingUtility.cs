@@ -82,4 +82,15 @@ public static class ParsingUtility
             statement.Execute();
         }
     }
+
+    public static void Expect(this bool b, string errorMessage, int lineNumber = -1)
+    {
+        if(b)
+            return;
+        
+        if(lineNumber == -1)
+            LoggingManager.LogError(errorMessage);
+        else
+            LoggingManager.LogError(errorMessage, lineNumber);
+    }
 }
