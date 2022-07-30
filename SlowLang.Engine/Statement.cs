@@ -48,7 +48,7 @@ public abstract class Statement
     public static void RegisterExtension(StatementExtensionRegistration registration)
     {
         //Check if the registration is valid
-        if (registration.ExtensionStatement.BaseType == typeof(Statement))
+        if (registration.ExtensionStatement.IsAssignableTo(typeof(StatementExtension)))
         {
             ExtensionRegistrations.Add(registration);
             return;
