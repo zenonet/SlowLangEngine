@@ -29,7 +29,7 @@ public readonly struct StatementExtensionRegistration
         CustomParser customParser,
         params TokenType[] match)
         where TBase : Statement
-        where TExtension : Statement
+        where TExtension : StatementExtension
     {
         return new StatementExtensionRegistration(typeof(TExtension), typeof(TBase), customParser);
     }
