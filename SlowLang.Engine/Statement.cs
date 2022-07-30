@@ -236,14 +236,11 @@ public abstract class Statement
     private static void SortRegistrations()
     {
         Registrations.Sort((x, y) =>
-                y.Match.Length - x.Match.Length //Sorts by match length
-
-            //Commented out because it created bugs
-            /*
-            +( //And by whether x or y have a custom parser
-                Convert.ToInt16(y.CustomParser != null) -
-                Convert.ToInt16(x.CustomParser != null)
-            )*/
+            (y.Match.Length - x.Match.Length //Sorts by match length
+                   + ( //And by whether x or y have a custom parser
+                       Convert.ToInt16(y.CustomParser != null) -
+                       Convert.ToInt16(x.CustomParser != null)
+                   ))
         );
     }
 
