@@ -1,5 +1,6 @@
 ![Nuget](https://img.shields.io/nuget/v/SlowLang.Engine)
 ![Nuget](https://img.shields.io/nuget/dt/SlowLang.Engine)
+![Lines of code](https://img.shields.io/tokei/lines/github/zenonet/SlowLangEngine)
 
 # SlowLangEngine
 
@@ -15,3 +16,6 @@ SlowLangEngine is a C# library for easily creating simple programming languages.
 ## Quick start
 
 * Create a new C# project.
+* Import SlowLang.Engine from nuget <br>
+  using your IDE or using the dotnet CLI like this: `dotnet add package SlowLang.Engine`
+*       
