@@ -161,13 +161,13 @@ public abstract class Statement
 
 
             //Instantiate the matching subclass
-            statement = (Activator.CreateInstance(registration.ExtensionStatement) as Statement)!;
+            StatementExtension statement = (Activator.CreateInstance(registration.ExtensionStatement) as StatementExtension)!;
 
             //Set the line number
             statement.LineNumber = list.List[0].LineNumber;
 
             //Invoke its OnParse() callback
-            statement.OnParse(ref list);
+            statement.OnParse(ref list, baseStatement);
 
             //Remove the tokens that match from the token list
             if (!statement.CutTokensManually())
