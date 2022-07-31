@@ -2,6 +2,7 @@
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using SlowLang.Engine.Tokens;
+using Zenonet.Utility;
 
 namespace SlowLang.Engine.Values;
 
@@ -17,18 +18,16 @@ public abstract class Value
     /// Contains all variables in the current script
     /// </summary>
     public static readonly Dictionary<string, Value> Variables = new();
-
-    public virtual Value ApplyOperator<TOperator>(
-        Value leftOperand,
+    public virtual Value ApplyOperator(
+        Subtype<Operator> @operator,
         Value rightOperand
     )
-        where TOperator : Operator
     {
         LoggingManager.LogError(
-            $"Unable to apply {typeof(TOperator).Name} to " +
-            $"{leftOperand.GetType().Name} and " +
+            $"Unable to apply {@operator.Type.Name} to " +
+            $"{this.GetType().Name} and " +
             $"{rightOperand.GetType().Name}");
-        
+
         return SlowVoid.I;
     }
 
