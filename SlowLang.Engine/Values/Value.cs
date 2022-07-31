@@ -18,6 +18,19 @@ public abstract class Value
     /// </summary>
     public static readonly Dictionary<string, Value> Variables = new();
 
+    public virtual Value ApplyOperator<TOperator>(
+        Value leftOperand,
+        Value rightOperand
+    )
+        where TOperator : Operator
+    {
+        LoggingManager.LogError(
+            $"Unable to apply {typeof(TOperator).Name} to " +
+            $"{leftOperand.GetType().Name} and " +
+            $"{rightOperand.GetType().Name}");
+        
+        return SlowVoid.I;
+    }
 
     /// <summary>
     /// Parses a TokenList into a Value object
@@ -128,7 +141,7 @@ public abstract class Value
     {
         if (token.Type != TokenType.Keyword)
             return null;
-        
+
         //Uhm...how should I explain this?
         //Basically I created a foreach loop with all the logic and my IDE said: "Hey, I can make this into a LINQ statement for you"
         return (from valueType in ParsingUtility.GetAllInheritors(typeof(Value))
