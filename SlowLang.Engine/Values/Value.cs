@@ -10,7 +10,7 @@ namespace SlowLang.Engine.Values;
 /// </summary>
 public abstract class Value
 {
-    private static readonly ILogger Logger = LoggingManager.LoggerFactory.CreateLogger("SlowLang.ValueSystem");
+    protected static readonly ILogger Logger = LoggingManager.LoggerFactory.CreateLogger("SlowLang.ValueSystem");
 
 
     /// <summary>
