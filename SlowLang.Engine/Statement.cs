@@ -7,7 +7,7 @@ using SlowLang.Engine.Values;
 namespace SlowLang.Engine.Statements;
 
 /// <summary>
-/// Represents a single statement in a SlowLang script
+/// Represents a single statement in a script
 /// </summary>
 public abstract class Statement
 {
