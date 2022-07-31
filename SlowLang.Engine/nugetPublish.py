@@ -1,9 +1,20 @@
 ﻿import os
+import subprocess
 import sys
 
 project_name = "SlowLang.Engine"
 
 csproj = open(project_name + ".csproj", "r+")
+
+
+def popen(cmd: str):
+    process = subprocess.Popen(
+        cmd,
+        stdout=subprocess.PIPE,
+        stderr=None,
+        shell=True
+    )
+    return str(process.communicate()[0])
 
 
 def get_increased_version(oldVersion: str) -> str:
@@ -40,7 +51,7 @@ def update_version() -> None:
 
 def pack():
     # pack the package
-    os.popen("dotnet pack --no-build --output " + os.getcwd() + "\\bin\\nuget\\")
+    print(popen("dotnet pack --no-build --output " + os.getcwd() + "\\bin\\nuget\\"))
 
 
 def push():
@@ -54,13 +65,19 @@ def push():
 
     print("Generated command to push\n" + cmd)
 
-    os.popen(
-        cmd
-    )
+    output = popen(cmd)
+
+    if "409" in str(output):
+        print("Package with this package version was pushed already")
+    elif "Created" in output:
+        print("success")
+    else:
+        print("unknown error:")
+        print(output.replace("\\\\r\\\\n", "\n"))
 
 
-if sys.argv[1] == "updateVersion":
+if sys.argv[1] == "updateVersion" or sys.argv[1] == "0":
     update_version()
-elif sys.argv[1] == "packAndPush":
+elif sys.argv[1] == "packAndPush" or sys.argv[1] == "1":
     pack()
     push()
