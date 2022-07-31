@@ -11,7 +11,8 @@ namespace SlowLang.Engine.Statements;
 /// </summary>
 public abstract class Statement
 {
-    protected static readonly ILogger Logger = LoggingManager.LoggerFactory.CreateLogger("SlowLang.Statements");
+    protected static readonly ILogger Logger =
+        LoggingManager.LoggerFactory.CreateLogger("SlowLang.Statements");
 
 
     private static bool isInitialized;
@@ -40,7 +41,9 @@ public abstract class Statement
             return;
         }
 
-        Logger.LogWarning("A StatementRegistration exists, which doesn't refer to a subclass of Statement");
+        Logger.LogWarning(
+            "A StatementRegistration exists, which doesn't refer to a subclass of Statement"
+        );
     }
 
     private static readonly List<StatementExtensionRegistration> ExtensionRegistrations = new();
@@ -137,7 +140,7 @@ public abstract class Statement
         {
             if (!registration.BaseStatement.IsInstanceOfType(baseStatement))
                 continue;
-            
+
             if (registration.Match.Length > list.List.Count)
                 continue;
 
@@ -149,7 +152,6 @@ public abstract class Statement
                     goto next; //Jump over all of the parsing stuff and continue with the next StatementRegistration
             }
 
-
             //If the StatementRegistration has a customParser defined:
             if (registration.CustomParser != null)
             {
@@ -158,7 +160,6 @@ public abstract class Statement
                 if (!result) //And if it couldn't parse the TokenList, jump over the parsing stuff and continue with the next StatementRegistration
                     goto next;
             }
-
 
             //Instantiate the matching subclass
             StatementExtension statement = (Activator.CreateInstance(registration.ExtensionStatement) as StatementExtension)!;
@@ -174,7 +175,6 @@ public abstract class Statement
                 list.List.RemoveRange(0, registration.Match.Length);
 
             return ParseStatementExtension(statement, ref list) ?? statement;
-
 
             next: ;
         }
@@ -237,10 +237,10 @@ public abstract class Statement
     {
         Registrations.Sort((x, y) =>
             (y.Match.Length - x.Match.Length //Sorts by match length
-                   + ( //And by whether x or y have a custom parser
-                       Convert.ToInt16(y.CustomParser != null) -
-                       Convert.ToInt16(x.CustomParser != null)
-                   ))
+             + ( //And by whether x or y have a custom parser
+                 Convert.ToInt16(y.CustomParser != null) -
+                 Convert.ToInt16(x.CustomParser != null)
+             ))
         );
     }
 
