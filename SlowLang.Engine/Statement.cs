@@ -229,12 +229,20 @@ public abstract class Statement
     private static void SortRegistrations()
     {
         Registrations.Sort((x, y) =>
-            (y.Match.Length - x.Match.Length //Sorts by match length
-             + ( //And by whether x or y have a custom parser
-                 Convert.ToInt16(y.CustomParser != null) -
-                 Convert.ToInt16(x.CustomParser != null)
-             ))
-        );
+        {
+            int i = y.Match.Length - x.Match.Length; //Sorts by match length
+
+            if (i == 0) //If the match length is the same
+            {
+                //decide by which one has a custom parser
+                i =
+                    (y.CustomParser != null ? 1 : 0) -
+                    (x.CustomParser != null ? 1 : 0);
+            }
+
+            return i;
+        });
+        ;
     }
 
 
