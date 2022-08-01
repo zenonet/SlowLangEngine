@@ -204,13 +204,6 @@ public abstract class Statement
     /// </summary>
     private static void Initialize()
     {
-        Assembly? asm = Assembly.GetAssembly(typeof(Statement));
-        if (asm is null)
-        {
-            Logger.LogCritical("Couldn't get the current Assembly");
-            return;
-        }
-
         //Iterate through all types which inherit from Statement
         foreach (Type type in ParsingUtility.GetAllInheritors(typeof(Statement)))
         {
