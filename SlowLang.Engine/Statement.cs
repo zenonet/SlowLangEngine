@@ -197,7 +197,7 @@ public abstract class Statement
         List<Statement> statements = new();
         while (list.List.Count > 0)
         {
-            statements.Add(Parse(ref list));
+            statements.Add(Parse(ref list)!);
             list.TrimStart(TokenType.Semicolon);
         }
 
