@@ -26,8 +26,9 @@ public abstract class Statement
 
     public virtual Value Execute() => SlowVoid.I;
 
-    protected virtual void OnParse(ref TokenList list)
+    protected virtual bool OnParse(ref TokenList list)
     {
+        return true;
     }
 
     private static readonly List<StatementRegistration> Registrations = new();
@@ -65,8 +66,9 @@ public abstract class Statement
     /// Parses a single statement
     /// </summary>
     /// <param name="list">A TokenList to parse from</param>
+    /// <param name="throwError">If an error should get thrown if no Statement could be parsed</param>
     /// <returns>A fully configured Statement</returns>
-    public static Statement Parse(ref TokenList list)
+    public static Statement? Parse(ref TokenList list, bool throwError = true)
     {
         //If the Parser wasn't initialized yet, do it now
         if (!isInitialized)
@@ -84,9 +86,12 @@ public abstract class Statement
         if (statement != null)
             return statement;
 
-
-        LoggingManager.LogError($"Unexpected string '{list.Peek().RawContent}'", list.Peek().LineNumber);
-        return null!;
+        if (throwError)
+        {
+            LoggingManager.LogError($"Unexpected string '{list.Peek().RawContent}'", list.Peek().LineNumber);
+        }
+        
+        return null;
     }
 
     private static Statement? ParseStatementFromRegistration(StatementRegistration registration, TokenList tokenList)

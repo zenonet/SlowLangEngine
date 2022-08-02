@@ -5,9 +5,9 @@ namespace SlowLang.Engine;
 
 public abstract class StatementExtension : Statement
 {
-    protected override void OnParse(ref TokenList list)
+    protected override bool OnParse(ref TokenList list)
     {
-        
+        return true;
     }
 
     public virtual void OnParse(ref TokenList list, Statement baseStatement)
