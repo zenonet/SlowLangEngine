@@ -43,7 +43,8 @@ public abstract class Statement
         }
 
         Logger.LogWarning(
-            "A StatementRegistration exists, which doesn't refer to a subclass of Statement"
+            "A StatementRegistration exists, " +
+            "which doesn't refer to a subclass of Statement"
         );
     }
 
@@ -90,7 +91,7 @@ public abstract class Statement
         {
             LoggingManager.LogError($"Unexpected string '{list.Peek().RawContent}'", list.Peek().LineNumber);
         }
-        
+
         return null;
     }
 
