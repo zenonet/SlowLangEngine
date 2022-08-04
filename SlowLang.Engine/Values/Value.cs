@@ -13,11 +13,7 @@ public abstract class Value
 {
     protected static readonly ILogger Logger = LoggingManager.LoggerFactory.CreateLogger("SlowLang.ValueSystem");
 
-
-    /// <summary>
-    /// Contains all variables in the current script
-    /// </summary>
-    public static readonly Dictionary<string, Value> Variables = new();
+    
     public virtual Value ApplyOperator(
         Subtype<Operator> @operator,
         Value rightOperand
@@ -110,7 +106,7 @@ public abstract class Value
     /// <returns>The value that got converted (hopefully)</returns>
     public TTarget ConvertImplicitly<TTarget>() where TTarget : Value
     {
-        if (TryConvertImplicitly(typeof(TTarget), out Value convertedValue))
+        if (TryConvertImplicitly(typeof(TTarget), out Value? convertedValue))
         {
             return (TTarget) convertedValue;
         }
@@ -127,7 +123,7 @@ public abstract class Value
     /// <returns>The value that got converted (hopefully)</returns>
     public Value ConvertImplicitly(Type targetType)
     {
-        if (TryConvertImplicitly(targetType, out Value convertedValue))
+        if (TryConvertImplicitly(targetType, out Value? convertedValue))
         {
             return convertedValue;
         }
