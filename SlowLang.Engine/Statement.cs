@@ -127,12 +127,20 @@ public abstract class Statement
         //Set the line number
         statement.LineNumber = tokenList.List[0].LineNumber;
 
+        TokenList statementSideTokenList = tokenList.Clone();
 
         //Invoke its OnParse() callback
-        statement.OnParse(ref tokenList);
+        if (!statement.OnParse(ref statementSideTokenList))
+        {
+            Logger.LogError($"Parser of {registration.Statement.Name} failed");
+            return null;
+        }
 
-        //Remove the tokens that match from the token list
-        if (!statement.CutTokensManually())
+        if (statement.CutTokensManually())
+            //Make the statements TokenList the new TokenList 
+            tokenList = statementSideTokenList;
+        else
+            //Remove the tokens that match from the token list
             tokenList.List.RemoveRange(0, registration.Match.Length);
 
         Statement? extension = ParseStatementExtension(statement, ref tokenList);
