@@ -248,7 +248,6 @@ public abstract class Statement
 
             return i;
         });
-        ;
     }
 
 
