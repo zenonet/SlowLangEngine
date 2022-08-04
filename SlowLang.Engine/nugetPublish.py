@@ -84,7 +84,9 @@ def update_version() -> None:
 
 def pack():
     # pack the package
-    popen("dotnet pack --no-build --output " + os.getcwd() + "/bin/nuget/")
+    cmd = ("dotnet pack --no-build --output " + os.getcwd() + "/bin/nuget/").replace("\\", "/")
+    print(cmd + "\n\n")
+    print(popen(cmd))
 
 
 def push():
@@ -94,7 +96,7 @@ def push():
     txt = csproj.read()
 
     cmd = "dotnet nuget push " + os.getcwd() + "/bin/nuget/" + project_name + "." + get_old_version(
-        txt) + ".nupkg --api-key " + apiKey + " --source" + source
+        txt) + ".nupkg --api-key " + apiKey + " --source " + source
 
     print("Generated command to push:\n    " + cmd)
 
