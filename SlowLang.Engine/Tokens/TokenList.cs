@@ -169,6 +169,19 @@ public class TokenList : IEnumerable<Token>
 
         return tokenLists.ToArray();
     }
+    
+    /// <summary>
+    /// Clones the TokenList without keeping any references
+    /// </summary>
+    /// <returns>The cloned TokenList</returns>
+    public TokenList Clone()
+    {
+        //NOTE: This might keep the Tokens as references
+        //This might me a bug, so keep that in mind
+        Token[] copy = new Token[List.Count];
+        List.CopyTo(copy);
+        return new TokenList(copy);
+    }
 
     /// <summary>
     /// Removes a range of elements from the TokenList
