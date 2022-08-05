@@ -7,8 +7,8 @@ namespace SlowLang.Engine.Values;
 /// </summary>
 public class SlowVoid : Value
 {
-    public static readonly SlowVoid I = new ();
-    
+    public static readonly SlowVoid I = new();
+
     public static bool TryParse(ref TokenList tokenList, out Value? value)
     {
         if (tokenList.Peek().RawContent == "void")

@@ -28,7 +28,6 @@ public class TokenList : IEnumerable<Token>
         return null!;
     }
 
-
     /// <summary>
     /// Checks if the token at a specific position is of a specific TokenType
     /// </summary>
@@ -66,6 +65,7 @@ public class TokenList : IEnumerable<Token>
             }
         }
     }
+
     /// <summary>
     /// Trims all occurrences of a TokenType from the start of the TokenList
     /// WARNING: This method wasn't tested yet (because i was too lazy)
@@ -75,16 +75,15 @@ public class TokenList : IEnumerable<Token>
     {
         //I created these TrimStart and TrimEnd overloads with just a single TokenType because this won't allocate an array just for one TokenType
 
-        if(List.Count < 1)
+        if (List.Count < 1)
             return;
-        
+
         while (List.Count > 0 && List[0].Type == typeToTrim)
         {
             List.RemoveAt(0);
         }
     }
-
-
+    
     /// <summary>
     /// Trims all occurrences of TokenTypes from the end of the TokenList
     /// WARNING: This method wasn't tested yet (because i was too lazy)
@@ -92,7 +91,6 @@ public class TokenList : IEnumerable<Token>
     /// <param name="typesToTrim">An array of all TokenType that should get cut</param>
     public void TrimEnd(params TokenType[] typesToTrim)
     {
-
         while (typesToTrim.Contains(List[0].Type))
         {
             foreach (TokenType type in typesToTrim)
@@ -104,11 +102,10 @@ public class TokenList : IEnumerable<Token>
                     continue;
 
                 List.RemoveAt(List.Count - 1);
-                
             }
         }
     }
-    
+
     /// <summary>
     /// Trims all occurrences of a TokenType from the end of the TokenList
     /// WARNING: This method wasn't tested yet (because i was too lazy)
@@ -118,7 +115,7 @@ public class TokenList : IEnumerable<Token>
     {
         //I created these TrimStart and TrimEnd overloads with just a single TokenType because this won't allocate an array just for one TokenType
 
-        if(List.Count < 1)
+        if (List.Count < 1)
             return;
 
         while (List.Count > 0 && List[^0].Type == typeToTrim)
@@ -142,8 +139,7 @@ public class TokenList : IEnumerable<Token>
         List.RemoveAt(offset);
         return first;
     }
-
-
+    
     /// <summary>
     /// Splits a TokenList at a separator
     /// </summary>
@@ -169,7 +165,7 @@ public class TokenList : IEnumerable<Token>
 
         return tokenLists.ToArray();
     }
-    
+
     /// <summary>
     /// Clones the TokenList without keeping any references
     /// </summary>

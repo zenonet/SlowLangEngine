@@ -12,6 +12,5 @@ public abstract class StatementExtension : Statement
 
     public virtual void OnParse(ref TokenList list, Statement baseStatement)
     {
-        
     }
 }

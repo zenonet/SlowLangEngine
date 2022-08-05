@@ -47,14 +47,12 @@ public static class ParsingUtility
         return codeBlock;
     }
 
-
     /// <summary>
     /// Converts a collection of Tokens into a TokenList
     /// </summary>
     /// <param name="tokens">The collection of tokens</param>
     /// <returns>The TokenList</returns>
     public static TokenList AsTokenList(this IEnumerable<Token> tokens) => new(tokens);
-
 
     /// <summary>
     /// Finds all classes in the current process which derive from a type
@@ -85,10 +83,10 @@ public static class ParsingUtility
 
     public static void Expect(this bool b, string errorMessage, int lineNumber = -1)
     {
-        if(b)
+        if (b)
             return;
-        
-        if(lineNumber == -1)
+
+        if (lineNumber == -1)
             LoggingManager.LogError(errorMessage);
         else
             LoggingManager.LogError(errorMessage, lineNumber);

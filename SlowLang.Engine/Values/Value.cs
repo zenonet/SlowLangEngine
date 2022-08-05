@@ -13,7 +13,6 @@ public abstract class Value
 {
     protected static readonly ILogger Logger = LoggingManager.LoggerFactory.CreateLogger("SlowLang.ValueSystem");
 
-    
     public virtual Value ApplyOperator(
         Subtype<Operator> @operator,
         Value rightOperand

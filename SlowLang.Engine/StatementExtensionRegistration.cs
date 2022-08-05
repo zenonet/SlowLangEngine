@@ -16,8 +16,7 @@ public readonly struct StatementExtensionRegistration
         ExtensionStatement = extensionStatement;
         BaseStatement = baseStatement;
     }
-    
-    
+
     public void Register()
     {
         Statement.RegisterExtension(this);

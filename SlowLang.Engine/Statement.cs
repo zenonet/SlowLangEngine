@@ -14,7 +14,6 @@ public abstract class Statement
     protected static readonly ILogger Logger =
         LoggingManager.LoggerFactory.CreateLogger("SlowLang.Statements");
 
-
     private static bool isInitialized;
 
     public int LineNumber { get; private set; }
@@ -62,7 +61,6 @@ public abstract class Statement
         Logger.LogWarning("A StatementExtensionRegistration exists, which doesn't refer to a subclass of StatementExtension");
     }
 
-
     /// <summary>
     /// Parses a single statement
     /// </summary>
@@ -101,7 +99,6 @@ public abstract class Statement
         if (registration.Match.Length > tokenList.List.Count)
             return null;
 
-
         //Iterate through all elements and check if the TokenType matches
         for (int i = 0; i < registration.Match.Length; i++)
         {
@@ -109,7 +106,6 @@ public abstract class Statement
             if (tokenList.List[i].Type != registration.Match[i])
                 return null;
         }
-
 
         //If the StatementRegistration has a customParser defined:
         if (registration.CustomParser != null)
@@ -119,7 +115,6 @@ public abstract class Statement
             if (!result) //And if it couldn't parse the TokenList, jump over the parsing stuff and continue with the next StatementRegistration
                 return null;
         }
-
 
         //Instantiate the matching subclass
         Statement statement = (Activator.CreateInstance(registration.Statement) as Statement)!;
@@ -193,7 +188,6 @@ public abstract class Statement
             next: ;
         }
 
-
         return null;
     }
 
@@ -257,7 +251,6 @@ public abstract class Statement
             return i;
         });
     }
-
 
     public override string ToString()
     {

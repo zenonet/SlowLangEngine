@@ -15,7 +15,7 @@ public readonly struct StatementRegistration
         Statement = statement;
         CustomParser = customParser;
     }
-    
+
     /// <summary>
     /// Creates a Statement Registration from a simple TokenType[] array
     /// </summary>
@@ -26,19 +26,17 @@ public readonly struct StatementRegistration
     {
         return new StatementRegistration(typeof(T), match);
     }
-    
-    
+
     public static StatementRegistration Create<T>(CustomParser customParser, params TokenType[] match) where T : Statement
     {
         return new StatementRegistration(typeof(T), match, customParser);
     }
 
-
     public void Register()
     {
         Statements.Statement.Register(this);
     }
-    
+
     public override string ToString() => Statement.Name + "-Registration";
 }
 
