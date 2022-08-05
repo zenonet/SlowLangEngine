@@ -29,15 +29,12 @@ public static class Lexer
         {@"\d+.?\d*(?:f|F)", TokenType.Float},
         {@"(?:(?:t|T)(?:rue|RUE))|(?:(?:f|F)(?:alse|ALSE))", TokenType.Bool},
 
-
         {@";", TokenType.Semicolon},
         {@",", TokenType.Comma},
         {@"\s*=\s*", TokenType.Equals},
 
-
         {@"\w*", TokenType.Keyword}, //Needs to be the last one because it would accept nearly anything
     };
-
 
     /// <summary>
     /// Adds a token to the TokenDefinitions
