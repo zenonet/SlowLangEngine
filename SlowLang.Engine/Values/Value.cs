@@ -7,7 +7,7 @@ using Zenonet.Utility;
 namespace SlowLang.Engine.Values;
 
 /// <summary>
-/// Represents a single Value in a SlowLang script
+/// Represents a single Value in a script
 /// </summary>
 public abstract class Value
 {
