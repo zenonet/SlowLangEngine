@@ -21,10 +21,14 @@ public abstract class Operator : StatementExtension
 
     public override Value Execute()
     {
-        return LeftOperand.Execute().ApplyOperator(
+        Value? value = LeftOperand.Execute().ApplyOperator(
             new Subtype<Operator>(this.GetType()),
             RightOperand.Execute()
         );
+        if(value == null)
+            LoggingManager.LogError("Unable to apply operator " + this.GetType().Name + " to " + LeftOperand.GetType().Name + " and " + RightOperand.GetType().Name);
+       
+        return value!;
     }
 }
 
