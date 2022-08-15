@@ -2,12 +2,12 @@
 
 namespace SlowLang.Engine.Statements.StatementRegistrations;
 
-public readonly struct StatementRegistration
+public struct StatementRegistration
 {
     public readonly Type Statement;
     public readonly TokenType[] Match;
 
-    public readonly CustomParser? CustomParser = null;
+    public CustomParser? CustomParser = null;
 
     internal StatementRegistration(Type statement, TokenType[]? match, CustomParser? customParser = null)
     {
@@ -35,6 +35,12 @@ public readonly struct StatementRegistration
     public void Register()
     {
         Statements.Statement.Register(this);
+    }
+
+    public StatementRegistration AddCustomParser(CustomParser customParser)
+    {
+        this.CustomParser = customParser;
+        return this;
     }
 
     public override string ToString() => Statement.Name + "-Registration";
