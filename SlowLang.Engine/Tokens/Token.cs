@@ -2,9 +2,9 @@
 
 public class Token
 {
-    public string RawContent;
-    public TokenType Type;
-    public int LineNumber;
+    public readonly string RawContent;
+    public readonly TokenType Type;
+    public readonly int LineNumber;
 
     public Token(string rawContent, TokenType type, int lineNumber)
     {
