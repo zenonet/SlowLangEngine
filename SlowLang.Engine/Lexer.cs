@@ -33,7 +33,7 @@ public static class Lexer
         {@",", TokenType.Comma},
         {@"\s*=\s*", TokenType.Equals},
 
-        {@"\w*", TokenType.Keyword}, //Needs to be the last one because it would accept nearly anything
+        {@"\w+", TokenType.Keyword}, //Needs to be the last one because it would accept nearly anything
     };
 
     /// <summary>
