@@ -35,5 +35,57 @@ Statement[] statements = Statement.ParseMultiple(tokenList);
 //that will execute all Statements in the list.
 statements.Execute();
 ```
-TODO
+
+This will lex, parse and execute your code
+
+* Now you can create your own Statements like this:
+```C#
+public class MyStatement : Statement
+{
+    private string keyword;
+
+    //This staticmethod will automatically get called on all classes that derive from Statement
+    public static void OnInitialize()
+    {
+        //Here, you can register you Statement so you don't have to do that at a central location
+        
+        StatementRegistration.Create<MyStatement>(
+                //This is a sequence of Tokens that need to be matched in order to start the parsing process.
+                TokenType.Keyword,
+                TokenType.OpeningBrace,
+                TokenType.ClosingBrace,
+                TokenType.Semicolon
+            )
+            .Register();
+    }
+    
+    
+    protected override void OnParse(ref TokenList list)
+    {
+        //On parse gets called as soon as the parsing process begins
+    
+        keyword = list.Peek().RawContent; // Get the keyword from the Tokenlist and store its value
+        
+        //The parser will automatically remove the rest of the Statements tokens from the TokenList
+    }
+    
+    public override Value Execute()
+    {
+        //This method gets called every time this Statement gets executed
+        
+        Console.WriteLine($"Function {keyword} was called");
+        
+        //Return the return value of the Statement
+        //Since this Statement doesn't have a return value, just return SlowVoid.I (NOT NULL!)
+        return SlowVoid.I;
+    }
+
+}
+```
+* Create your source code file and save for example
+```hwl
+hello();
+```
+This should now write "Function hello was called" to the console
+
 
