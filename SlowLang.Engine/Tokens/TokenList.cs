@@ -172,10 +172,12 @@ public class TokenList : IEnumerable<Token>
     /// <returns>The cloned TokenList</returns>
     public TokenList Clone()
     {
-        //NOTE: This might keep the Tokens as references
-        //This might me a bug, so keep that in mind
         Token[] copy = new Token[List.Count];
-        List.CopyTo(copy);
+        for (var i = 0; i < List.Count; i++)
+        {
+            copy[i] = List[i].Clone();
+        }
+        
         return new TokenList(copy);
     }
 
