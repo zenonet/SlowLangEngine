@@ -22,7 +22,7 @@ public class HelloWorldStatement : Statement
 
     private string parameter = null!;
     
-    protected override void OnParse(ref TokenList list)
+    protected override bool OnParse(ref TokenList list)
     {
         string keyword = list.Pop().RawContent; // Cut the keyword
         
@@ -39,6 +39,9 @@ public class HelloWorldStatement : Statement
         //Because we didn't override CutTokensManually(), it defaults to false meaning we
         //don't have to worry about completely removing the statement from the TokenList
         //The parser will just remove the parsed TokenType sequence for us
+
+        //Tell the parser that we successfully parsed the statement
+        return true;
     }
 
     public override Value Execute()
