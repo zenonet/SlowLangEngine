@@ -6,7 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FCF98382-CF9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{F30201ED-B197-441D-A48A-17AF4F0B95E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldLang", "HelloWorldLang\HelloWorldLang.csproj", "{63940082-1923-47A0-A1A0-8CFF8507F194}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorldLang", "Examples\HelloWorldLang\HelloWorldLang.csproj", "{63940082-1923-47A0-A1A0-8CFF8507F194}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
