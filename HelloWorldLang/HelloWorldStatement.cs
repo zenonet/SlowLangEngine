@@ -33,8 +33,8 @@ public class HelloWorldStatement : Statement
         
         list.Pop(); // Cut the opening brace
 
-        //Get the token between the braces
-        parameter = list.Pop().RawContent;
+        //Get the token between the braces and trim the quotes from it
+        parameter = list.Pop().RawContent.Trim('"');
 
         //Because we didn't override CutTokensManually(), it defaults to false meaning we
         //don't have to worry about completely removing the statement from the TokenList
