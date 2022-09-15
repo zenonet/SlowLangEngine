@@ -26,7 +26,7 @@ public static class LoggingManager
     public static void LogError(string errorMessage, int lineNumber)
     {
         ErrorLogger.LogError($"Error is line {lineNumber}: " + errorMessage);
-        Environment.Exit(0);
+        Environment.Exit(1);
     }
 
     public static void LogError(string errorMessage)
