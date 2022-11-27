@@ -1,15 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <Title>SlowLangEngine</Title>
-        <PackageVersion>1.0.6</PackageVersion>
+        <PackageVersion>1.0.7</PackageVersion>
         <Authors>zenonet</Authors>
         <Description>An engine for creating simple programming languages in C#. Base of  SlowLang</Description>
         <RepositoryUrl>https://github.com/zenonet/SlowLangEngine</RepositoryUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <LangVersion>11</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
