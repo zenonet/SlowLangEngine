@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.Logging;
+using SlowLang.Engine.Initialization;
 using SlowLang.Engine.Statements.StatementRegistrations;
 using SlowLang.Engine.Tokens;
 using SlowLang.Engine.Values;
@@ -213,7 +214,7 @@ public abstract class Statement
     private static void Initialize()
     {
         //Iterate through all types which inherit from Statement
-        foreach (Type type in ParsingUtility.GetAllInheritors(typeof(Statement)))
+        foreach (Type type in ParsingUtility.GetAllInheritors(typeof(IInitializable)))
         {
             //Ignore abstract Statement inheritors
             if (type.IsAbstract)
