@@ -221,7 +221,7 @@ public abstract class Statement
                 continue;
 
             //Get a static method called OnInitialize inside of them
-            MethodInfo? initMethod = type.GetMethod("OnInitialize");
+            MethodInfo? initMethod = type.GetMethod("Initialize");
 
             //If it exists, call it
             if (initMethod is null)
