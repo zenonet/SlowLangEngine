@@ -40,12 +40,12 @@ This will lex, parse and execute your code
 
 * Now you can create your own Statements like this:
 ```C#
-public class MyStatement : Statement
+public class MyStatement : Statement, IInitializable
 {
     private string keyword;
 
-    //This staticmethod will automatically get called on all classes that derive from Statement
-    public static void OnInitialize()
+    //This static method will automatically get called on all classes that implement IInitializable
+    public static void Initialize()
     {
         //Here, you can register you Statement so you don't have to do that at a central location
         
