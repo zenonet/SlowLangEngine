@@ -77,7 +77,7 @@ public abstract class Statement
         Statement? statement = null;
         foreach (StatementRegistration registration in Registrations)
         {
-            statement = ParseStatementFromRegistration(registration, list);
+            statement = ParseStatementFromRegistration(registration, ref list);
 
             if (statement != null)
                 break;
@@ -94,7 +94,7 @@ public abstract class Statement
         return null;
     }
 
-    private static Statement? ParseStatementFromRegistration(StatementRegistration registration, TokenList tokenList)
+    private static Statement? ParseStatementFromRegistration(StatementRegistration registration,ref TokenList tokenList)
     {
         //Check if the matching sequence in the current registration would fit int o list.List
         if (registration.Match.Length > tokenList.List.Count)
@@ -192,7 +192,7 @@ public abstract class Statement
         return null;
     }
 
-    public static Statement[] ParseMultiple(TokenList list)
+    public static Statement[] ParseMultiple(ref TokenList list)
     {
         //If the Parser wasn't initialized yet, do it now
         if (!isInitialized)
