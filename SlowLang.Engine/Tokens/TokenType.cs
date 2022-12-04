@@ -15,6 +15,13 @@ public enum TokenType
     ClosingBrace,
 
     Equals,
+    GreaterThan,
+    LessThan,
+    
+    Plus,
+    Minus,
+    Multiply,
+    Divide,
 
     Semicolon,
     Comma,
