@@ -31,7 +31,15 @@ public static class Lexer
 
         {@";", TokenType.Semicolon},
         {@",", TokenType.Comma},
+        
         {@"\s*=\s*", TokenType.Equals},
+        {@"\s*<\s*", TokenType.LessThan},
+        {@"\s*>\s*", TokenType.GreaterThan},
+        
+        {@"\s*+\s*", TokenType.Plus},
+        {@"\s*-\s*", TokenType.Minus},
+        {@"\s*\*\s*", TokenType.Multiply},
+        {@"\s*/\s*", TokenType.Divide},
 
         {@"\w+", TokenType.Keyword}, //Needs to be the last one because it would accept nearly anything
     };
