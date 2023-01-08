@@ -36,7 +36,7 @@ public static class Lexer
         {@"\s*<\s*", TokenType.LessThan},
         {@"\s*>\s*", TokenType.GreaterThan},
         
-        {@"\s*+\s*", TokenType.Plus},
+        {@"\s*\+\s*", TokenType.Plus},
         {@"\s*-\s*", TokenType.Minus},
         {@"\s*\*\s*", TokenType.Multiply},
         {@"\s*/\s*", TokenType.Divide},
