@@ -13,6 +13,9 @@ public enum TokenType
 
     OpeningBrace,
     ClosingBrace,
+    
+    OpeningSquareBrace,
+    ClosingSquareBrace,
 
     Equals,
     GreaterThan,

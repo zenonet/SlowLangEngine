@@ -24,6 +24,9 @@ public static class Lexer
 
         {@"\{|^block", TokenType.OpeningCurlyBrace},
         {@"\}|^end", TokenType.ClosingCurlyBrace},
+        
+        {@"\[", TokenType.OpeningSquareBrace},
+        {@"\]", TokenType.ClosingSquareBrace},
 
         {@"\d+", TokenType.Int},
         {@"\d+.?\d*(?:f|F)", TokenType.Float},
