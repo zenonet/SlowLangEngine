@@ -30,11 +30,14 @@ public abstract class Value
     /// Parses a TokenList into a Value object
     /// </summary>
     /// <returns>The parsed value object</returns>
-    public static Value? Parse(TokenList tokenList)
+    public static Value? Parse(ref TokenList tokenList)
     {
         //Iterate through all inheritors of Value
         foreach (Type inheritor in ParsingUtility.GetAllInheritors(typeof(Value)))
         {
+            // Make a copy of the tokenlist to ensure that value parsers who fail don't change the tokenlist
+            TokenList list = tokenList.Clone();
+            
             //Get their TryParse method
             MethodInfo? method = inheritor.GetMethod("TryParse");
 
@@ -43,7 +46,7 @@ public abstract class Value
                 continue;
 
             //Create the parameters array
-            object?[] parameters = {tokenList, null};
+            object?[] parameters = {list, null};
 
             //Invoke the method
             bool worked = (bool) method.Invoke(null, parameters)!;
@@ -52,6 +55,9 @@ public abstract class Value
             if (!worked)
                 continue;
 
+            // If the parser was able to parse the value, then apply the changes to the tokenlist
+            tokenList = list;
+            
             //If the parsing was successful return the Value that got parsed
             if (parameters[1] is Value)
                 return (Value) parameters[1]!;
