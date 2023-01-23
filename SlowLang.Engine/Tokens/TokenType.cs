@@ -29,4 +29,5 @@ public enum TokenType
     Semicolon,
     Comma,
     Colon,
+    Dot,
 }
