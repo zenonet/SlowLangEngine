@@ -56,7 +56,7 @@ public abstract class Value
                 continue;
 
             // If the parser was able to parse the value, then apply the changes to the tokenlist
-            tokenList = list;
+            tokenList = parameters[0] as TokenList ?? throw new InvalidOperationException();
             
             //If the parsing was successful return the Value that got parsed
             if (parameters[1] is Value)
