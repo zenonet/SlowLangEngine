@@ -5,8 +5,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <Title>SlowLangEngine</Title>
-        <PackageVersion>1.2.2</PackageVersion>
-        <Version>1.2.2</Version>
+        <PackageVersion>1.2.3</PackageVersion>
+        <Version>1.2.3</Version>
         <Authors>zenonet</Authors>
         <Description>An engine for creating simple programming languages in C#. Base of  SlowLang</Description>
         <RepositoryUrl>https://github.com/zenonet/SlowLangEngine</RepositoryUrl>
