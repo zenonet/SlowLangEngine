@@ -22,8 +22,8 @@ public static class Lexer
         {@"\(", TokenType.OpeningBrace},
         {@"\)", TokenType.ClosingBrace},
 
-        {@"\{|^block", TokenType.OpeningCurlyBrace},
-        {@"\}|^end", TokenType.ClosingCurlyBrace},
+        {@"\{", TokenType.OpeningCurlyBrace},
+        {@"\}", TokenType.ClosingCurlyBrace},
         
         {@"\[", TokenType.OpeningSquareBrace},
         {@"\]", TokenType.ClosingSquareBrace},
