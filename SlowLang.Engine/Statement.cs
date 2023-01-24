@@ -241,6 +241,8 @@ public abstract class Statement
         {
             int i = y.Match.Length - x.Match.Length; //Sorts by match length
 
+            i += y.AdditionalPriority - x.AdditionalPriority;
+            
             if (i == 0) //If the match length is the same
             {
                 //decide by which one has a custom parser

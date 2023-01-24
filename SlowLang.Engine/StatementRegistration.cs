@@ -8,6 +8,8 @@ public struct StatementRegistration
     public readonly TokenType[] Match;
 
     public CustomParser? CustomParser = null;
+    
+    public int AdditionalPriority = 0;
 
     internal StatementRegistration(Type statement, TokenType[]? match, CustomParser? customParser = null)
     {
@@ -40,6 +42,12 @@ public struct StatementRegistration
     public StatementRegistration AddCustomParser(CustomParser customParser)
     {
         this.CustomParser = customParser;
+        return this;
+    }
+    
+    public StatementRegistration AddPriority(int priority)
+    {
+        this.AdditionalPriority = priority;
         return this;
     }
 
