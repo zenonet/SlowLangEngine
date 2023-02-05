@@ -30,7 +30,7 @@ public static class Lexer
 
         {@"\d+", TokenType.Int},
         {@"\d+.?\d*(?:f|F)", TokenType.Float},
-        {@"(?:(?:t|T)(?:rue|RUE))|(?:(?:f|F)(?:alse|ALSE))", TokenType.Bool},
+        {@"(?:(?:t|T)(?:rue|RUE)|(?:f|F)(?:alse|ALSE))", TokenType.Bool},
 
         {@";", TokenType.Semicolon},
         {@",", TokenType.Comma},
