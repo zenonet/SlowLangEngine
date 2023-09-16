@@ -26,7 +26,7 @@ public abstract class Statement
 
     public virtual Value Execute() => SlowVoid.I;
 
-    protected virtual bool OnParse(ref TokenList list)
+    public virtual bool OnParse(ref TokenList list)
     {
         return true;
     }
@@ -178,7 +178,11 @@ public abstract class Statement
             statement.LineNumber = list.List[0].LineNumber;
 
             //Invoke its OnParse() callback
-            statement.OnParse(ref list, baseStatement);
+            if (!statement.OnParse(ref list, baseStatement))
+            {
+                Logger.LogError($"Parser of {registration.ExtensionStatement.Name} failed");
+                return null;
+            }
 
             //Remove the tokens that match from the token list
             if (!statement.CutTokensManually())
