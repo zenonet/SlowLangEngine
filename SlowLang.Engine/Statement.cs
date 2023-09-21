@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using Microsoft.Extensions.Logging;
 using SlowLang.Engine.Initialization;
 using SlowLang.Engine.Statements.StatementRegistrations;
@@ -67,8 +69,9 @@ public abstract class Statement
     /// </summary>
     /// <param name="list">A TokenList to parse from</param>
     /// <param name="throwError">If an error should get thrown if no Statement could be parsed</param>
+    /// <param name="onStatementInstantiated">An event, that is called when the Statement instance is created but the OnParse method isn't called yet</param>
     /// <returns>A fully configured Statement</returns>
-    public static Statement? Parse(ref TokenList list, bool throwError = true)
+    public static Statement? Parse(ref TokenList list, bool throwError = true, Action<Statement>? onStatementInstantiated = null)
     {
         //If the Parser wasn't initialized yet, do it now
         if (!isInitialized)
@@ -77,7 +80,7 @@ public abstract class Statement
         Statement? statement = null;
         foreach (StatementRegistration registration in Registrations)
         {
-            statement = ParseStatementFromRegistration(registration, ref list);
+            statement = ParseStatementFromRegistration(registration, ref list, onStatementInstantiated);
 
             if (statement != null)
                 break;
@@ -94,7 +97,7 @@ public abstract class Statement
         return null;
     }
 
-    private static Statement? ParseStatementFromRegistration(StatementRegistration registration,ref TokenList tokenList)
+    private static Statement? ParseStatementFromRegistration(StatementRegistration registration, ref TokenList tokenList, Action<Statement>? onStatementInstantiated = null)
     {
         //Check if the matching sequence in the current registration would fit int o list.List
         if (registration.Match.Length > tokenList.List.Count)
@@ -123,6 +126,8 @@ public abstract class Statement
         //Set the line number
         statement.LineNumber = tokenList.List[0].LineNumber;
 
+        onStatementInstantiated?.Invoke(statement);
+        
         TokenList statementSideTokenList = tokenList.Clone();
 
         //Invoke its OnParse() callback
@@ -246,7 +251,7 @@ public abstract class Statement
             int i = y.Match.Length - x.Match.Length; //Sorts by match length
 
             i += y.AdditionalPriority - x.AdditionalPriority;
-            
+
             if (i == 0) //If the match length is the same
             {
                 //decide by which one has a custom parser
