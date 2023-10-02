@@ -11,7 +11,7 @@
         <Description>An engine for creating simple programming languages in C#. Base of  SlowLang</Description>
         <RepositoryUrl>https://github.com/zenonet/SlowLangEngine</RepositoryUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <LangVersion>11</LangVersion>
+        <LangVersion>preview</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
