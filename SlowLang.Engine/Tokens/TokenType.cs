@@ -8,18 +8,22 @@ public enum TokenType
     Float,
     Bool,
 
-    OpeningCurlyBrace,
-    ClosingCurlyBrace,
+    OpeningCurlyBracket,
+    ClosingCurlyBracket,
 
-    OpeningBrace,
-    ClosingBrace,
+    OpeningParenthesis,
+    ClosingParenthesis,
     
-    OpeningSquareBrace,
-    ClosingSquareBrace,
+    OpeningSquareBracket,
+    ClosingSquareBracket,
 
     Equals,
+    DoubleEquals,
     GreaterThan,
     LessThan,
+    
+    BooleanAnd,
+    BooleanOr,
     
     Plus,
     Minus,
@@ -30,4 +34,6 @@ public enum TokenType
     Comma,
     Colon,
     Dot,
+    QuestionMark,
+    ExclamationMark,
 }
