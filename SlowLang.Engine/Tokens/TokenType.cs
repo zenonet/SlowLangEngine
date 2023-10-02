@@ -36,4 +36,8 @@ public enum TokenType
     Dot,
     QuestionMark,
     ExclamationMark,
+    
+    SingleLineComment,
+    MultiLineComment,
+    ClosingMultiLineComment,
 }

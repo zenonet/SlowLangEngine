@@ -53,6 +53,10 @@ public static class Lexer
         {@"\s*-\s*", TokenType.Minus},
         {@"\s*\*\s*", TokenType.Multiply},
         {@"\s*/\s*", TokenType.Divide},
+        
+        {@"\s//\s", TokenType.SingleLineComment},
+        {@"\s*\/\*\s*", TokenType.MultiLineComment},
+        {@"\s*\*\/\s*", TokenType.ClosingMultiLineComment},
 
         {@"\w+", TokenType.Keyword}, //Needs to be the last one because it would accept nearly anything
     };
