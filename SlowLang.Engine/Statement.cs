@@ -38,7 +38,7 @@ public abstract class Statement
     public static void Register(StatementRegistration registration)
     {
         //Check if the registration is valid
-        if (registration.Statement.BaseType == typeof(Statement))
+        if (registration.Statement.IsAssignableTo(typeof(Statement)))
         {
             Registrations.Add(registration);
             return;
