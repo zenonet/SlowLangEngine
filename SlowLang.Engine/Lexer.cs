@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
 using SlowLang.Engine.Tokens;
 
@@ -19,14 +21,19 @@ public static class Lexer
     {
         {"\".*?\"", TokenType.String},
 
-        {@"\(", TokenType.OpeningBrace},
-        {@"\)", TokenType.ClosingBrace},
+        {@"\(", TokenType.OpeningParenthesis},
+        {@"\)", TokenType.ClosingParenthesis},
 
-        {@"\{", TokenType.OpeningCurlyBrace},
-        {@"\}", TokenType.ClosingCurlyBrace},
+        {@"\{", TokenType.OpeningCurlyBracket},
+        {@"\}", TokenType.ClosingCurlyBracket},
         
-        {@"\[", TokenType.OpeningSquareBrace},
-        {@"\]", TokenType.ClosingSquareBrace},
+        {@"\[", TokenType.OpeningSquareBracket},
+        {@"\]", TokenType.ClosingSquareBracket},
+
+        {@"==", TokenType.DoubleEquals},
+        {@"!", TokenType.ExclamationMark},
+        {@"&&", TokenType.BooleanAnd},
+        {@"\|\|", TokenType.BooleanOr},
 
         {@"\d+", TokenType.Int},
         {@"\d+.?\d*(?:f|F)", TokenType.Float},
@@ -36,6 +43,7 @@ public static class Lexer
         {@",", TokenType.Comma},
         {@":", TokenType.Colon},
         {@"\.", TokenType.Dot},
+        {@"\?", TokenType.QuestionMark},
         
         {@"\s*=\s*", TokenType.Equals},
         {@"\s*<\s*", TokenType.LessThan},
@@ -107,7 +115,6 @@ public static class Lexer
             }
         }
 
-        Logger.LogInformation("Lexed:" + tokenList);
         return tokenList;
     }
 }
