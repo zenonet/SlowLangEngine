@@ -11,7 +11,7 @@ public struct StatementRegistration
     
     public int AdditionalPriority = 0;
 
-    internal StatementRegistration(Type statement, TokenType[]? match, CustomParser? customParser = null)
+    private StatementRegistration(Type statement, TokenType[]? match, CustomParser? customParser = null)
     {
         Match = match ?? Array.Empty<TokenType>();
         Statement = statement;
@@ -26,12 +26,12 @@ public struct StatementRegistration
     /// <returns>A new StatementRegistration with the settings </returns>
     public static StatementRegistration Create<T>(params TokenType[] match) where T : Statement
     {
-        return new StatementRegistration(typeof(T), match);
+        return new (typeof(T), match);
     }
 
     public static StatementRegistration Create<T>(CustomParser customParser, params TokenType[] match) where T : Statement
     {
-        return new StatementRegistration(typeof(T), match, customParser);
+        return new (typeof(T), match, customParser);
     }
 
     public void Register()
