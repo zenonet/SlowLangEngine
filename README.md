@@ -88,4 +88,8 @@ hello();
 ```
 This should now write "Function hello was called" to the console
 
+## Created with SlowLangEngine
+
+* [SlowLang](https://github.com/zenonet/SlowLang/)
+* [McFuncScript](https://github.com/zenonet/McFuncSharp/#mcfuncscript)
 
