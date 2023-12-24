@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 using Microsoft.Extensions.Logging;
 using SlowLang.Engine.Initialization;
 using SlowLang.Engine.Statements.StatementRegistrations;
@@ -14,8 +12,10 @@ namespace SlowLang.Engine.Statements;
 /// </summary>
 public abstract class Statement
 {
-    protected static readonly ILogger Logger =
-        LoggingManager.LoggerFactory.CreateLogger("SlowLang.Statements");
+    private static readonly Lazy<ILogger> LazyLogger = new(() => LoggingManager.LoggerFactory.CreateLogger("SlowLang.Statements"));
+
+    protected static ILogger Logger => LazyLogger.Value;
+
 
     private static bool isInitialized;
 
@@ -127,7 +127,7 @@ public abstract class Statement
         statement.LineNumber = tokenList.List[0].LineNumber;
 
         onStatementInstantiated?.Invoke(statement);
-        
+
         TokenList statementSideTokenList = tokenList.Clone();
 
         //Invoke its OnParse() callback

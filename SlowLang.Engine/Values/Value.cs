@@ -11,7 +11,8 @@ namespace SlowLang.Engine.Values;
 /// </summary>
 public abstract class Value
 {
-    protected static readonly ILogger Logger = LoggingManager.LoggerFactory.CreateLogger("SlowLang.ValueSystem");
+    private static readonly Lazy<ILogger> LazyLogger = new(() => LoggingManager.LoggerFactory.CreateLogger("SlowLang.ValueSystem"));
+    protected static ILogger Logger => LazyLogger.Value;
 
     public virtual Value? ApplyOperator(
         Subtype<Operator> @operator,
@@ -37,7 +38,7 @@ public abstract class Value
         {
             // Make a copy of the tokenlist to ensure that value parsers who fail don't change the tokenlist
             TokenList list = tokenList.Clone();
-            
+
             //Get their TryParse method
             MethodInfo? method = inheritor.GetMethod("TryParse");
 
@@ -57,7 +58,7 @@ public abstract class Value
 
             // If the parser was able to parse the value, then apply the changes to the tokenlist
             tokenList = parameters[0] as TokenList ?? throw new InvalidOperationException();
-            
+
             //If the parsing was successful return the Value that got parsed
             if (parameters[1] is Value)
                 return (Value) parameters[1]!;
