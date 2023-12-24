@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using Microsoft.Extensions.Logging;
+﻿using System.Text.RegularExpressions;
 using SlowLang.Engine.Tokens;
 
 namespace SlowLang.Engine;
@@ -11,12 +8,10 @@ namespace SlowLang.Engine;
 /// </summary>
 public static class Lexer
 {
-    private static readonly ILogger Logger = LoggingManager.LoggerFactory.CreateLogger("SlowLang.Lexer");
-
     private static readonly string NewLine = Environment.NewLine;
 
     private static Dictionary<string, TokenType> tokenDefinitions = new();
-
+    
     private static readonly Dictionary<string, TokenType> DefaultTokenDefinitions = new()
     {
         {"\".*?\"", TokenType.String},
