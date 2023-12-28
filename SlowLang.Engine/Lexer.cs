@@ -30,7 +30,7 @@ public static class Lexer
         {@"&&", TokenType.BooleanAnd},
         {@"\|\|", TokenType.BooleanOr},
 
-        {@"\d+\.?\d*(?:f|F)|\d*\.\d+(?:f|F)", TokenType.Float},
+        {@"(?:\d+\.?\d*(?:f|F)|\d*\.\d+(?:f|F)?)", TokenType.Float},
         {@"\d+", TokenType.Int},
         {@"(?:(?:t|T)(?:rue|RUE)|(?:f|F)(?:alse|ALSE))", TokenType.Bool},
 
